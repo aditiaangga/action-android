@@ -42,7 +42,10 @@ jobs:
         api: 30
         tag: google_apis
         abi: x86_64
-        cmd: mvn test
+        cmd: |
+            adb wait-for-device
+            adb shell getprop sys.boot_completed
+            adb devices
         cmdOptions: -noaudio -no-window -no-boot-anim
         bootTimeout: 600
 
