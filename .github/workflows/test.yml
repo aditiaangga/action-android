@@ -43,9 +43,21 @@ jobs:
         tag: google_apis
         abi: x86_64
         cmd: |
-            adb wait-for-device
-            adb shell getprop sys.boot_completed
-            adb devices
+          adb kill-server
+          adb start-server
+
+          echo "Waiting for emulator..."
+          adb wait-for-device
+
+          boot_completed=""
+          until [[ "$boot_completed" == "1" ]]; do
+            boot_completed=$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
+            echo "Still booting..."
+            sleep 5
+          done
+
+          echo "Emulator ready!"
+          adb devices
         cmdOptions: -noaudio -no-window -no-boot-anim
         bootTimeout: 600
 
