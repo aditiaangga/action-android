@@ -65,6 +65,6 @@ jobs:
   #         cmd: adb shell getprop
   #         bootTimeout: 500
   #     - uses: actions/upload-artifact@v4
-        with:
-          name: logcat
-          path: artifacts/logcat.log
+  #       with:
+  #         name: logcat
+  #         path: artifacts/logcat.log
